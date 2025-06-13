@@ -1,0 +1,10 @@
+# Small scale Monte Carlo experiment for quick testing
+
+experiment:
+  n: 1000
+  seed: 123
+  visualization_sample: 1000
+
+output:
+  directory: "outputs"
+  save_plot: true

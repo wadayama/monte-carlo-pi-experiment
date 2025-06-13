@@ -1,0 +1,19 @@
+# Default Monte Carlo π estimation experiment configuration
+
+experiment:
+  # Number of random points to generate for π estimation
+  n: 100000
+  
+  # Random seed for reproducible results
+  seed: 42
+  
+  # Maximum number of points to store for visualization (optional)
+  # If not specified, all points are stored (may use significant memory for large n)
+  visualization_sample: 5000
+
+output:
+  # Directory where experiment results will be saved
+  directory: "outputs"
+  
+  # Whether to save scatter plot visualization
+  save_plot: true

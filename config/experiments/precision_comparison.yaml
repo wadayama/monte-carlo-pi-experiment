@@ -1,0 +1,10 @@
+# High precision experiment for accuracy analysis
+
+experiment:
+  n: 10000000
+  seed: 2025
+  visualization_sample: 20000
+
+output:
+  directory: "outputs"
+  save_plot: true

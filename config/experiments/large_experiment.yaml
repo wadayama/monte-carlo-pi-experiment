@@ -1,0 +1,10 @@
+# Large scale Monte Carlo experiment for high precision
+
+experiment:
+  n: 1000000
+  seed: 789
+  visualization_sample: 10000
+
+output:
+  directory: "outputs"
+  save_plot: true

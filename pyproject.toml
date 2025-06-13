@@ -1,0 +1,42 @@
+[project]
+name = "monte-carlo-pi-experiment"
+version = "0.1.0"
+description = "Monte Carlo method for calculating pi using random sampling"
+authors = [
+    {name = "Claude Code", email = "noreply@anthropic.com"}
+]
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.24.0",
+    "matplotlib>=3.7.0",
+    "pyyaml>=6.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=7.4.0",
+    "ruff>=0.1.0",
+    "pyright>=1.1.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "YTT", "S", "BLE", "FBT", "B", "A", "C4", "DTZ", "T10", "ISC", "ICN", "G", "PIE", "T20", "PYI", "PT", "Q", "RSE", "RET", "SLF", "SIM", "TID", "TCH", "ARG", "PTH", "ERA", "PD", "PGH", "PL", "TRY", "NPY", "RUF"]
+ignore = ["S101", "PLR0913", "PLR2004", "TRY003", "G004", "TRY300", "TRY401", "S603", "S607"]
+
+[tool.pyright]
+pythonVersion = "3.11"
+typeCheckingMode = "basic"
+reportUnusedImport = true
+reportUnusedFunction = true
+reportUnusedVariable = true

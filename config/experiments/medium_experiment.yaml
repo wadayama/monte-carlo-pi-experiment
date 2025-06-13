@@ -1,0 +1,10 @@
+# Medium scale Monte Carlo experiment
+
+experiment:
+  n: 100000
+  seed: 456
+  visualization_sample: 5000
+
+output:
+  directory: "outputs"
+  save_plot: true
