@@ -358,7 +358,9 @@ def get_git_commit_hash() -> str:
         return "not-a-git-repo"
 
 
-def run_single_experiment(config: dict, output_dir: Path) -> ExperimentResult:
+def run_single_experiment(
+    config: dict, output_dir: Path, config_name: str | None = None
+) -> ExperimentResult:
     """Run a single Monte Carlo experiment based on configuration.
 
     Parameters
@@ -367,6 +369,9 @@ def run_single_experiment(config: dict, output_dir: Path) -> ExperimentResult:
         Configuration dictionary containing experiment parameters.
     output_dir : Path
         Directory where outputs should be saved.
+    config_name : str | None, optional
+        Name of the configuration file (without extension) for output filename.
+        If None, uses generic naming.
 
     Returns
     -------
@@ -401,7 +406,13 @@ def run_single_experiment(config: dict, output_dir: Path) -> ExperimentResult:
                 "Reproducibility might be compromised."
             )
 
-        plot_filename = f"monte_carlo_pi_n{n}_seed{seed}_{commit_hash}.pdf"
+        # Create filename with config name for better traceability
+        if config_name:
+            plot_filename = (
+                f"monte_carlo_pi_{config_name}_n{n}_seed{seed}_{commit_hash}.pdf"
+            )
+        else:
+            plot_filename = f"monte_carlo_pi_n{n}_seed{seed}_{commit_hash}.pdf"
         plot_path = output_dir / plot_filename
 
         output_dir.mkdir(parents=True, exist_ok=True)
@@ -474,7 +485,9 @@ def main() -> None:
             for config_file in config_files:
                 logging.info("Running experiment with config: %s", config_file.name)
                 config = load_config(config_file)
-                result = run_single_experiment(config, args.output_dir)
+                # Extract config name (without extension) for filename
+                config_name = config_file.stem
+                result = run_single_experiment(config, args.output_dir, config_name)
                 results.append(result)
 
             # Calculate and log batch statistics
@@ -496,7 +509,11 @@ def main() -> None:
         else:
             # Run single experiment
             config = load_config(args.config)
-            run_single_experiment(config, args.output_dir)
+            # Extract config name for filename if available
+            config_name = (
+                args.config.stem if args.config.name != "experiment.yaml" else None
+            )
+            run_single_experiment(config, args.output_dir, config_name)
 
     except Exception:
         logging.exception("Experiment failed")

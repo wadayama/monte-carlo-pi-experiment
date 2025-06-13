@@ -211,16 +211,32 @@ The accuracy of π estimation improves with the number of sample points:
 
 ## Output Files
 
-Results are saved as PDF files in the `outputs/` directory with naming convention:
+Results are saved as PDF files in the `outputs/` directory with enhanced naming conventions for maximum traceability:
+
+**Batch experiments (using predefined configs):**
+```
+monte_carlo_pi_{config_name}_n{points}_seed{seed}_{git_commit_hash}.pdf
+```
+
+**Single experiments (default config):**
 ```
 monte_carlo_pi_n{points}_seed{seed}_{git_commit_hash}.pdf
 ```
+
+**Examples:**
+- `monte_carlo_pi_small_experiment_n1000_seed123_7a0493c3c91b7f46d68ae209f0401fe7d9c66bef.pdf`
+- `monte_carlo_pi_precision_comparison_n10000000_seed2025_7a0493c3c91b7f46d68ae209f0401fe7d9c66bef-dirty.pdf`
 
 Each PDF contains:
 - Scatter plot of sampled points (red: inside circle, blue: outside)
 - Unit circle and square boundaries
 - Experiment results and statistics
 - Git commit hash for reproducibility
+
+**Git Status Indicators:**
+- Clean repository: `{commit_hash}`
+- Dirty repository (uncommitted changes): `{commit_hash}-dirty`
+- Not a git repository: `not-a-git-repo`
 
 ## Reproducibility
 
